@@ -12,7 +12,7 @@ spec:
   - name: kaniko
     image: uhub.service.ucloud.cn/uk8sdemo/executor:debug
     command:
-    - /busybox/cat
+    - cat
     tty: true
     volumeMounts:
       - name: kaniko-secret
@@ -26,19 +26,12 @@ spec:
   ) {
     node(POD_LABEL) {
         stage('Clone') {
-            git url: '{{REPO}}'
-        }
-        stage('Compile') {
-            container('golang') {
-                    sh """
-                    make  
-                    """
-            }
+            git credentialsId: 'a9245f23-3644-4bc1-8ff3-9edd068958c9', url: 'https://github.com/DennnnyX/kaniko.git'
         }
         stage('Build Image')
             container('kaniko') {
                 sh """
-                /kaniko/executor -c `pwd`/ -f `pwd`/image/Dockerfile -d {{IMAGE}}
+                /kaniko/executor -c `pwd`/ -f `pwd`/image/Dockerfile -d sunrdocker/jdk17-git-maven-docker-focal
                 """
             }
        stage('Deploy') {

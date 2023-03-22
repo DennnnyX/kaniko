@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: hello
-    image: {{IMAGE}}
+    image: sunrdocker/jdk17-git-maven-docker-focal
     command:
       - /hello 
   restartPolicy: Never 
