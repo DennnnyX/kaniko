@@ -38,7 +38,7 @@ spec:
         stage('Build Image')
             container('kaniko') {
                 sh """
-                /kaniko/executor -c `pwd`/ -f `pwd`/image/Dockerfile -d {{IMAGE}}
+                /kaniko/executor -c `pwd`/ -f `pwd`/image/Dockerfile -d dennnys/pipeline:v2
                 """
             }
        stage('Deploy') {
